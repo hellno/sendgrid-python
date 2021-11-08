@@ -27,23 +27,23 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install CodeClimate Dependencies
-        run: |
-          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
-            > ./cc-test-reporter
-          chmod +x ./cc-test-reporter
-          "./cc-test-reporter before-build"
-        env:
-          CC_TEST_REPORTER_ID: ${{ env.CODE_CLIMATE_TOKEN }}
+#      - name: Install CodeClimate Dependencies
+#        run: |
+#          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+#            > ./cc-test-reporter
+#          chmod +x ./cc-test-reporter
+#          "./cc-test-reporter before-build"
+#        env:
+#          CC_TEST_REPORTER_ID: ${{ env.CODE_CLIMATE_TOKEN }}
 
       - name: Run tests
         run: make test-docker
 
-      - name: Run CodeClimate analysis
-        run: |
-          make test-install
-          ". venv/bin/activate; codecov"
-          "./cc-test-reporter after-build --exit-code $?"
+#      - name: Run CodeClimate analysis
+#        run: |
+#          make test-install
+#          ". venv/bin/activate; codecov"
+#          "./cc-test-reporter after-build --exit-code $?"
 
   notify-on-failure:
     name: Slack notify on failure
